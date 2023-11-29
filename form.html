@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Form Validation</title>
+</head>
+<body>
+    <form id="myForm">
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name" required><br>
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email" required><br>
+        <label for="id">ID:</label><br>
+        <input type="text" id="id" name="id" required><br>
+        <label for="vehicle_no">Vehicle No:</label><br>
+        <input type="text" id="vehicle_no" name="vehicle_no" required><br>
+        <label for="chess_no">Chess No:</label><br>
+        <input type="text" id="chess_no" name="chess_no" required><br>
+        <label for="photo">Photo:</label><br>
+        <input type="file" id="photo" name="photo" required><br>
+        <label for="nid">NID:</label><br>
+        <input type="file" id="nid" name="nid" required><br>
+        <label for="present_address">Present Address:</label><br>
+        <textarea id="present_address" name="present_address" required></textarea><br>
+        <label for="permanent_address">Permanent Address:</label><br>
+        <textarea id="permanent_address" name="permanent_address" required></textarea><br>
+        <input type="submit" value="Submit">
+    </form>
+
+    <script>
+        function validateForm() {
+            var name = document.forms["myForm"]["name"].value;
+            var email = document.forms["myForm"]["email"].value;
+            var phone = document.forms["myForm"]["phone"].value;
+
+            if (name == "" || email == "" || phone == "") {
+                alert("All fields must be filled out");
+                return false;
+            }
+
+            var re = /\S+@\S+\.\S+/;
+            if (!re.test(email)) {
+                alert("Invalid email format");
+                return false;
+            }
+
+            var re = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
+            if (!re.test(phone)) {
+                alert("Invalid phone number format");
+                return false;
+            }
+        }
+
+        document.getElementById("myForm").addEventListener("submit", function(event){
+
+            event.preventDefault(); // prevent form from submitting
+
+
+                // perform your frontend validation here
+
+                if (validateForm()) {
+
+                    var formData = new FormData(document.getElementById("myForm"));
+
+                    var request = new XMLHttpRequest();
+
+                    request.open("POST", "form.php");
+
+                    request.send(formData);
+
+                }
+
+        });
+    </script>
+</body>
+</html>

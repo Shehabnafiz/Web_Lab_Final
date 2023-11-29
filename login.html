@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        form {
+            display: inline-block;
+            margin-top: 50px;
+        }
+
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            box-sizing: border-box;
+        }
+
+        button[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button[type="submit"]:hover {
+            opacity: 0.8;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('form').on('submit', function(event) {
+                // user validation
+                var email = $('#email').val().trim();
+                var password = $('#password').val().trim();
+
+                if (email === '' || password === '') {
+                    alert('Please enter valid credentials');
+                    event.preventDefault();
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <h2>Login Form</h2>
+    <form action="login.php" method="post">
+        <label for="email">Email:</label>
+        <input type="text" id="email" name="email">
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password">
+
+        <button type="submit">Login</button>
+    </form>
+</body>
+</html>
